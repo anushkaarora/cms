@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+		 ['Data', 'Count'],
+		          <?php 
+		      $element_text = ['Published Posts','Posts', 'Draft Posts' , 'Comments', 'Pending Comments' , 'Users', 'Subscriber Count' , 'Categories'];
+			  $element_count = [$post_publish_count ,$post_counts, $post_draft_count, $comments_count, $post_comment_count, $post_users_count, $users_count, $categories_count];
+			  
+			  for($i =0;$i < 8; $i++) {
+				  echo "['{$element_text[$i]}'" . "," . "{$element_count[$i]}],";
+				  
+			  }
+		  
+		  ?>
+         
+        ]);
+
+        var options = {
+          chart: {
+            title: '',
+            subtitle: '',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+  </head>
+  <body>
+    <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+  </body>
+</html>
+
+	  
